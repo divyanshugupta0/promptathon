@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Event Seat Optimizer - AI-powered seating arrangement tool that maximizes attendee satisfaction">
+    <title>Event Seat Optimizer | AI-Powered Seating Arrangement</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <h1>Event Seat Optimizer</h1>
+            </div>
+            <div class="header-actions">
+                <!-- Theme Toggle -->
+                <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5" />
+                        <line x1="12" y1="1" x2="12" y2="3" />
+                        <line x1="12" y1="21" x2="12" y2="23" />
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                        <line x1="1" y1="12" x2="3" y2="12" />
+                        <line x1="21" y1="12" x2="23" y2="12" />
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                    </svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                    </svg>
+                </button>
+
+                <button class="btn btn-ghost" id="importBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="17 8 12 3 7 8" />
+                        <line x1="12" y1="3" x2="12" y2="15" />
+                    </svg>
+                    Import
+                </button>
+                <button class="btn btn-ghost" id="exportBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    Export
+                </button>
+                <button class="btn btn-primary" id="pdfBtn" style="margin-left: 0.5rem;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                    Tickets
+                </button>
+
+                <!-- User Menu -->
+                <div class="user-menu" id="userMenu">
+                    <div class="user-avatar" id="userAvatar">G</div>
+                    <span class="user-name" id="userName">Guest</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <aside class="panel config-panel">
+                <div class="panel-header">
+                    <h2>Configuration</h2>
+                    <span class="badge">Setup</span>
+                </div>
+
+                <section class="config-section">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                            <line x1="3" y1="9" x2="21" y2="9" />
+                            <line x1="9" y1="21" x2="9" y2="9" />
+                        </svg>
+                        Venue Layout
+                    </h3>
+                    <div class="form-group">
+                        <label>Venue Name</label>
+                        <input type="text" id="venueName" placeholder="e.g. Grand Hall A" value="Main Auditorium"
+                            style="margin-bottom: 0.5rem;">
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Rows</label>
+                            <input type="number" id="venueRows" value="8" min="1" max="50">
+                        </div>
+                        <div class="form-group">
+                            <label>Seats per Row</label>
+                            <input type="number" id="venueCols" value="10" min="1" max="50">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label style="display:flex; justify-content:space-between;">
+                            VIP Rows (Front)
+                            <span id="vipRowsVal" style="color:var(--primary); font-weight:600">2</span>
+                        </label>
+                        <input type="range" id="vipRows" value="2" min="0" max="8"
+                            style="width:100%; accent-color: var(--primary);">
+                    </div>
+                    <button class="btn btn-secondary" id="generateVenueBtn" style="width:100%">Update Venue</button>
+                </section>
+
+                <section class="config-section">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                        Attendees
+                    </h3>
+                    <div class="attendee-stats" style="margin-bottom: 1rem;">
+                        <div class="stat-item">
+                            <span class="stat-value" id="totalAttendees">0</span>
+                            <span class="stat-label">Total</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="vipAttendees">0</span>
+                            <span class="stat-label">VIPs</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="groupCount">0</span>
+                            <span class="stat-label">Groups</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="btn btn-secondary" id="addAttendeeBtn" style="flex:1">
+                            + Add
+                        </button>
+                        <button class="btn btn-ghost" id="generateSampleBtn" style="flex:1">Auto-Fill</button>
+                    </div>
+                </section>
+
+                <section class="config-section">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3" />
+                            <path
+                                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                        </svg>
+                        Algorithm
+                    </h3>
+                    <div class="form-group">
+                        <label>Mode</label>
+                        <select id="algorithmMode"
+                            style="width:100%; padding: 0.5rem; border-radius:var(--radius-sm); border:1px solid var(--border);">
+                            <option value="balanced">Balanced Mode</option>
+                            <option value="fast">Speed Priority</option>
+                            <option value="thorough">Deep Analysis</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 1rem;">
+                        <label style="font-weight:600; font-size:0.8rem; margin-bottom:0.5rem; display:block">Custom
+                            Weights</label>
+
+                        <div class="form-group" style="margin-bottom:0.5rem">
+                            <label style="display:flex; justify-content:space-between; font-size:0.8rem">
+                                Friendships <span id="friendWeightVal">30%</span>
+                            </label>
+                            <input type="range" id="friendWeight" value="30" min="0" max="100"
+                                style="width:100%; accent-color: var(--primary);">
+                        </div>
+                        <div class="form-group" style="margin-bottom:0.5rem">
+                            <label style="display:flex; justify-content:space-between; font-size:0.8rem">
+                                VIP Area <span id="vipWeightVal">25%</span>
+                            </label>
+                            <input type="range" id="vipWeight" value="25" min="0" max="100"
+                                style="width:100%; accent-color: var(--primary);">
+                        </div>
+                        <div class="form-group" style="margin-bottom:0.5rem">
+                            <label style="display:flex; justify-content:space-between; font-size:0.8rem">
+                                Group Cohesion <span id="groupWeightVal">25%</span>
+                            </label>
+                            <input type="range" id="groupWeight" value="25" min="0" max="100"
+                                style="width:100%; accent-color: var(--primary);">
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" id="optimizeBtn" style="width:100%">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                        </svg>
+                        Optimize Seating
+                    </button>
+
+                    <button class="btn btn-ghost" id="compareBtn" style="width:100%; margin-top:0.5rem">
+                        Compare Results
+                    </button>
+                </section>
+            </aside>
+
+            <section class="panel venue-panel">
+                <div class="panel-header">
+                    <h2>Venue Layout</h2>
+                    <div class="view-controls">
+                        <button class="view-btn active" data-view="grid">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="7" height="7" />
+                                <rect x="14" y="3" width="7" height="7" />
+                                <rect x="14" y="14" width="7" height="7" />
+                                <rect x="3" y="14" width="7" height="7" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="stage-area">
+                    <div class="stage"><span>STAGE / FRONT</span></div>
+                </div>
+
+                <div class="venue-container" id="venueContainer">
+                    <div class="empty-venue">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                            <line x1="3" y1="9" x2="21" y2="9" />
+                            <line x1="9" y1="21" x2="9" y2="9" />
+                        </svg>
+                        <p>Configure venue settings and click "Generate Venue" to begin</p>
+                    </div>
+                </div>
+
+                <div class="legend">
+                    <div class="legend-item"><span class="legend-color vip"></span><span>VIP Seat</span></div>
+                    <div class="legend-item"><span class="legend-color regular"></span><span>Regular Seat</span></div>
+                    <div class="legend-item"><span class="legend-color occupied"></span><span>Occupied</span></div>
+                    <div class="legend-item"><span class="legend-color empty"></span><span>Empty</span></div>
+                </div>
+            </section>
+
+            <aside class="panel results-panel">
+                <div class="panel-header">
+                    <h2>Results</h2>
+                    <span class="badge" id="resultStatus">Waiting</span>
+                </div>
+
+                <div class="results-tabs">
+                    <button class="result-tab active" onclick="switchResultTab('metrics', this)">Metrics</button>
+                    <button class="result-tab" onclick="switchResultTab('progress', this)">Progress</button>
+                    <button class="result-tab" onclick="switchResultTab('list', this)">Assignments</button>
+                    <button class="result-tab" onclick="switchResultTab('ai', this)">✨ AI</button>
+                </div>
+
+                <div class="panel-body scrollable">
+                    <!-- Tab 1: Metrics -->
+                    <div class="result-content active" id="tab-metrics">
+                        <section class="results-section">
+                            <div class="score-display">
+                                <div class="main-score">
+                                    <svg viewBox="0 0 100 100" class="score-ring">
+                                        <defs>
+                                            <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                <stop offset="0%" stop-color="#2563eb" />
+                                                <stop offset="100%" stop-color="#1e40af" />
+                                            </linearGradient>
+                                        </defs>
+                                        <circle cx="50" cy="50" r="45" class="score-bg" />
+                                        <circle cx="50" cy="50" r="45" class="score-fill" id="scoreRing" />
+                                    </svg>
+                                    <div class="score-value">
+                                        <span id="overallScore">0</span>
+                                        <span class="score-label">Overall Score</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="metric-bars">
+                                <div class="metric-item">
+                                    <div class="metric-header"><span>Friend Proximity</span><span
+                                            id="friendScore">0%</span></div>
+                                    <div class="metric-bar">
+                                        <div class="metric-fill friend" id="friendBar"></div>
+                                    </div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-header"><span>VIP Placement</span><span id="vipScore">0%</span>
+                                    </div>
+                                    <div class="metric-bar">
+                                        <div class="metric-fill vip" id="vipBar"></div>
+                                    </div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-header"><span>Group Cohesion</span><span
+                                            id="groupScore">0%</span></div>
+                                    <div class="metric-bar">
+                                        <div class="metric-fill group" id="groupBar"></div>
+                                    </div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-header"><span>Stage Distance</span><span
+                                            id="distanceScore">0%</span></div>
+                                    <div class="metric-bar">
+                                        <div class="metric-fill distance" id="distanceBar"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Tab 2: Progress -->
+                    <div class="result-content" id="tab-progress">
+                        <section class="results-section">
+                            <div class="progress-container" id="progressContainer">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="progressFill"></div>
+                                </div>
+                                <div class="progress-stats">
+                                    <span>Generation: <strong id="currentGen">0</strong></span>
+                                    <span>Best: <strong id="bestFitness">0</strong></span>
+                                </div>
+                            </div>
+                            <div class="convergence-chart" id="convergenceChart">
+                                <canvas id="chartCanvas"></canvas>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Tab 3: List -->
+                    <div class="result-content" id="tab-list">
+                        <section class="results-section attendee-list-section">
+                            <div class="search-box">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8" />
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                                </svg>
+                                <input type="text" id="searchAttendee" placeholder="Search attendee...">
+                            </div>
+                            <div class="attendee-list" id="attendeeList">
+                                <div class="empty-list">
+                                    <p>No attendees yet</p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Tab 4: AI Insights -->
+                    <div class="result-content" id="tab-ai">
+                        <section class="results-section">
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                <h3>Gemini Analysis</h3>
+                                <button class="btn btn-primary" id="btnAiAnalyze"
+                                    style="padding: 0.25rem 0.75rem; font-size: 0.8rem;">
+                                    Generate
+                                </button>
+                            </div>
+                            <div class="ai-response" id="aiResponse"
+                                style="white-space: pre-wrap; font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">
+                                <p style="font-style: italic;">Click Generate to analyze the current seating plan with
+                                    Google Gemini AI.</p>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <script>
+                    function switchResultTab(tabName, btn) {
+                        // Update buttons
+                        document.querySelectorAll('.result-tab').forEach(b => b.classList.remove('active'));
+                        if (btn) btn.classList.add('active');
+
+                        // Update content
+                        document.querySelectorAll('.result-content').forEach(c => c.classList.remove('active'));
+                        document.getElementById('tab-' + tabName).classList.add('active');
+                    }
+                </script>
+            </aside>
+        </main>
+
+        <!-- Comparison Panel -->
+        <div class="comparison-panel" id="comparisonPanel">
+            <div class="comparison-item">
+                <div class="comparison-label">Previous Best</div>
+                <div class="comparison-score" id="prevScore">--</div>
+            </div>
+            <div class="comparison-vs">VS</div>
+            <div class="comparison-item">
+                <div class="comparison-label">Current Best</div>
+                <div class="comparison-score better" id="currScore">--</div>
+            </div>
+            <button class="btn btn-secondary" id="acceptNewBtn">Accept New</button>
+            <button class="btn btn-ghost" id="keepOldBtn">Keep Previous</button>
+        </div>
+    </div>
+
+    <!-- Parallel Optimization Comparison Modal -->
+    <div class="modal" id="parallelCompareModal">
+        <div class="modal-content" style="max-width: 700px;">
+            <div class="modal-header">
+                <h3>🎯 Choose Your Optimization</h3>
+                <button class="close-btn" id="closeParallelModal">&times;</button>
+            </div>
+            <div class="parallel-compare-container">
+                <!-- Algorithm Result -->
+                <div class="parallel-result-card" id="algoResultCard">
+                    <div class="result-card-header">
+                        <span class="result-icon">⚡</span>
+                        <h4>Algorithm</h4>
+                        <span class="result-badge algo">Genetic Algorithm</span>
+                    </div>
+                    <div class="result-card-score">
+                        <div class="big-score" id="algoScore">--</div>
+                        <span class="score-label">Satisfaction Score</span>
+                    </div>
+                    <div class="result-card-details" id="algoDetails">
+                        <div class="detail-row"><span>Friend Proximity:</span><span id="algoFriend">--%</span></div>
+                        <div class="detail-row"><span>VIP Placement:</span><span id="algoVip">--%</span></div>
+                        <div class="detail-row"><span>Group Cohesion:</span><span id="algoGroup">--%</span></div>
+                    </div>
+                    <button class="btn btn-secondary use-result-btn" id="useAlgoBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            style="width:16px;height:16px;margin-right:6px;">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                        Use Algorithm Result
+                    </button>
+                </div>
+
+                <!-- VS Divider -->
+                <div class="parallel-vs-divider">
+                    <span>VS</span>
+                </div>
+
+                <!-- Gemini AI Result -->
+                <div class="parallel-result-card gemini-card" id="geminiResultCard">
+                    <div class="result-card-header">
+                        <span class="result-icon">✨</span>
+                        <h4>Gemini AI</h4>
+                        <span class="result-badge gemini">Powered by AI</span>
+                    </div>
+                    <div class="result-card-score">
+                        <div class="big-score gemini-loading" id="geminiScore">
+                            <div class="gemini-spinner"></div>
+                        </div>
+                        <span class="score-label">Satisfaction Score</span>
+                    </div>
+                    <div class="result-card-details" id="geminiDetails">
+                        <div class="detail-row"><span>Friend Proximity:</span><span id="geminiFriend">--%</span></div>
+                        <div class="detail-row"><span>VIP Placement:</span><span id="geminiVip">--%</span></div>
+                        <div class="detail-row"><span>Group Cohesion:</span><span id="geminiGroup">--%</span></div>
+                    </div>
+                    <button class="btn btn-primary use-result-btn" id="useGeminiBtn" disabled>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            style="width:16px;height:16px;margin-right:6px;">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                        Use Gemini Result
+                    </button>
+                    <p class="gemini-status" id="geminiStatus">⏳ Waiting for Gemini AI...</p>
+                </div>
+            </div>
+            <div class="parallel-compare-footer">
+                <p class="compare-hint">💡 <strong>Tip:</strong> Algorithm is faster, Gemini AI considers context and
+                    rules more intelligently.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="addAttendeeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Attendee</h3>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <form id="attendeeForm">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="attendeeName" required placeholder="Enter attendee name">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="attendeeEmail" placeholder="Enter email (optional)">
+                </div>
+                <div class="form-group">
+                    <label>Type</label>
+                    <select id="attendeeType">
+                        <option value="regular">Regular</option>
+                        <option value="vip">VIP</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Priority Level (1-10)</label>
+                    <input type="number" id="attendeePriority" value="5" min="1" max="10">
+                </div>
+                <div class="form-group">
+                    <label>Group / Friends</label>
+                    <input type="text" id="attendeeGroup" placeholder="Enter group name">
+                </div>
+                <div class="form-group">
+                    <label>Preferred Row</label>
+                    <select id="attendeePreference">
+                        <option value="any">No Preference</option>
+                        <option value="front">Front Rows</option>
+                        <option value="middle">Middle Rows</option>
+                        <option value="back">Back Rows</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelAttendee">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Attendee</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h3>Optimizing Seating Arrangement</h3>
+            <p id="loadingStatus">Initializing genetic algorithm...</p>
+        </div>
+    </div>
+
+    <!-- PDF & QR Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="api.js"></script>
+    <script src="optimizer.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
