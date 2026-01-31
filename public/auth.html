@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Event Seat Optimizer - Login to access AI-powered seating arrangement">
-    <title>Login | Event Seat Optimizer</title>
+    <meta name="description" content="AutoSeat - Login to access AI-powered seating arrangement">
+    <title>Login | AutoSeat</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
@@ -15,62 +15,54 @@
 
 <body>
     <div class="auth-container">
-        <!-- Animated Background -->
         <div class="bg-animation">
             <div class="floating-shape shape-1"></div>
             <div class="floating-shape shape-2"></div>
-            <div class="floating-shape shape-3"></div>
-            <div class="floating-shape shape-4"></div>
         </div>
 
-        <!-- Theme Toggle -->
-        <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
-            <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="5" />
-                <line x1="12" y1="1" x2="12" y2="3" />
-                <line x1="12" y1="21" x2="12" y2="23" />
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                <line x1="1" y1="12" x2="3" y2="12" />
-                <line x1="21" y1="12" x2="23" y2="12" />
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-            </svg>
-            <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-            </svg>
-        </button>
-
-        <!-- Auth Card -->
         <div class="auth-card">
+            <!-- Theme Toggle -->
+            <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5" />
+                    <line x1="12" y1="1" x2="12" y2="3" />
+                    <line x1="12" y1="21" x2="12" y2="23" />
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                    <line x1="1" y1="12" x2="3" y2="12" />
+                    <line x1="21" y1="12" x2="23" y2="12" />
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                </svg>
+            </button>
+
             <div class="auth-header">
                 <div class="logo">
                     <div class="logo-icon">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24"
+                            height="24">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2 17L12 22L22 17" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2 12L12 17L22 12" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </div>
-                    <h1>Event Seat Optimizer</h1>
+                    <h1>AutoSeat</h1>
                 </div>
-                <p class="tagline">AI-Powered Seating Arrangement</p>
+                <p>Welcome back! Please enter your details.</p>
             </div>
 
-            <!-- Tab Navigation -->
             <div class="auth-tabs">
                 <button class="tab-btn active" data-tab="login">Sign In</button>
-                <button class="tab-btn" data-tab="signup">Sign Up</button>
-                <div class="tab-indicator"></div>
+                <button class="tab-btn" data-tab="signup">Create Account</button>
             </div>
 
             <!-- Login Form -->
             <form class="auth-form active" id="loginForm" data-form="login">
                 <div class="form-group">
-                    <label for="loginEmail">Email Address</label>
+                    <label for="loginEmail">Email</label>
                     <div class="input-wrapper">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
@@ -89,13 +81,13 @@
                         </svg>
                         <input type="password" id="loginPassword" placeholder="Enter your password" required>
                         <button type="button" class="toggle-password" tabindex="-1">
-                            <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
+                            <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                width="18" height="18">
                                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                                 <circle cx="12" cy="12" r="3" />
                             </svg>
                             <svg class="eye-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
+                                stroke-width="2" width="18" height="18">
                                 <path
                                     d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
                                 <line x1="1" y1="1" x2="23" y2="23" />
@@ -105,15 +97,14 @@
                 </div>
 
                 <div class="form-options">
-                    <label class="remember-me">
+                    <label class="remember-me" style="display:flex; align-items:center; gap:0.5rem">
                         <input type="checkbox" id="rememberMe">
-                        <span class="checkmark"></span>
                         Remember me
                     </label>
                     <a href="#" class="forgot-password">Forgot Password?</a>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-submit">
+                <button type="submit" class="btn btn-submit" style="margin-top:1rem">
                     <span>Sign In</span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="5" y1="12" x2="19" y2="12" />
@@ -145,7 +136,8 @@
                     </button>
                 </div>
 
-                <div class="error-message" id="loginError"></div>
+                <div class="error-message" id="loginError" style="color:var(--error); margin-top:1rem; display:none;">
+                </div>
             </form>
 
             <!-- Signup Form -->
@@ -162,7 +154,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="signupEmail">Email Address</label>
+                    <label for="signupEmail">Email</label>
                     <div class="input-wrapper">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
@@ -179,27 +171,20 @@
                             <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                             <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                         </svg>
-                        <input type="password" id="signupPassword" placeholder="Create a password" required
-                            minlength="6">
+                        <input type="password" id="signupPassword" placeholder="Create password" required minlength="6">
                         <button type="button" class="toggle-password" tabindex="-1">
-                            <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
+                            <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                width="18" height="18">
                                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                                 <circle cx="12" cy="12" r="3" />
                             </svg>
                             <svg class="eye-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
+                                stroke-width="2" width="18" height="18">
                                 <path
                                     d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
                                 <line x1="1" y1="1" x2="23" y2="23" />
                             </svg>
                         </button>
-                    </div>
-                    <div class="password-strength" id="passwordStrength">
-                        <div class="strength-bar">
-                            <div class="strength-fill"></div>
-                        </div>
-                        <span class="strength-text">Password strength</span>
                     </div>
                 </div>
 
@@ -210,31 +195,31 @@
                             <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                             <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                         </svg>
-                        <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
-                        <span class="match-indicator" id="matchIndicator">
-                            <svg class="match-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <polyline points="20 6 9 17 4 12" />
+                        <input type="password" id="confirmPassword" placeholder="Confirm password" required>
+                        <button type="button" class="toggle-password" tabindex="-1">
+                            <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                width="18" height="18">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                <circle cx="12" cy="12" r="3" />
                             </svg>
-                            <svg class="mismatch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <line x1="18" y1="6" x2="6" y2="18" />
-                                <line x1="6" y1="6" x2="18" y2="18" />
+                            <svg class="eye-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" width="18" height="18">
+                                <path
+                                    d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
+                                <line x1="1" y1="1" x2="23" y2="23" />
                             </svg>
-                        </span>
+                        </button>
                     </div>
-                    <span class="match-text" id="matchText"></span>
                 </div>
 
                 <div class="form-options">
-                    <label class="terms-check">
+                    <label class="terms-check" style="display:flex; align-items:center; gap:0.5rem">
                         <input type="checkbox" id="agreeTerms" required>
-                        <span class="checkmark"></span>
-                        I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                        I agree to Terms
                     </label>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-submit" id="signupBtn" disabled>
+                <button type="submit" class="btn btn-submit" id="signupBtn" style="margin-top:1rem">
                     <span>Create Account</span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="5" y1="12" x2="19" y2="12" />
@@ -264,17 +249,16 @@
                         </svg>
                         Google
                     </button>
-
                 </div>
 
-                <div class="error-message" id="signupError"></div>
+                <div class="error-message" id="signupError" style="color:var(--error); margin-top:1rem; display:none;">
+                </div>
             </form>
-        </div>
 
-        <!-- Footer -->
-        <footer class="auth-footer">
-            <p>&copy; 2026 Event Seat Optimizer. Powered by AI.</p>
-        </footer>
+            <footer style="margin-top: 2rem; color: var(--text-muted); font-size: 0.8rem; text-align:center">
+                &copy; 2026 AutoSeat
+            </footer>
+        </div>
     </div>
 
     <!-- Firebase SDK -->

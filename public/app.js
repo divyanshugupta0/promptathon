@@ -68,11 +68,16 @@ class App {
         this.themeToggle = document.getElementById('themeToggle');
         this.userNameEl = document.getElementById('userName');
         this.userAvatarEl = document.getElementById('userAvatar');
+        this.userMenu = document.getElementById('userMenu');
+        this.userDropdown = document.getElementById('userDropdown');
+        this.logoutBtn = document.getElementById('logoutBtn');
 
         // Config Inputs
         this.venueRowsInput = document.getElementById('venueRows');
         this.venueColsInput = document.getElementById('venueCols');
         this.vipRowsInput = document.getElementById('vipRows');
+        this.vipRowsVal = document.getElementById('vipRowsVal');
+        this.venueNameInput = document.getElementById('venueName');
 
         // Buttons
         this.generateVenueBtn = document.getElementById('generateVenueBtn');
@@ -189,6 +194,25 @@ class App {
     }
 
     bindEvents() {
+        // User Menu
+        this.userMenu?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.userDropdown?.classList.toggle('active');
+        });
+
+        document.addEventListener('click', () => {
+            this.userDropdown?.classList.remove('active');
+        });
+
+        this.logoutBtn?.addEventListener('click', () => {
+            if (typeof firebase !== 'undefined' && firebase.auth) {
+                firebase.auth().signOut().then(() => window.location.href = 'auth.html');
+            } else {
+                localStorage.removeItem('demoUser');
+                window.location.href = 'auth.html';
+            }
+        });
+
         this.generateVenueBtn.addEventListener('click', () => {
             this.updateVenueConfig();
             this.saveToFirebase();
@@ -203,6 +227,17 @@ class App {
         this.closeModalBtn.addEventListener('click', () => this.closeModal());
         this.cancelAttendeeBtn.addEventListener('click', () => this.closeModal());
         this.attendeeForm.addEventListener('submit', (e) => this.handleAttendeeSubmit(e));
+
+        // VIP Rows Slider
+        this.vipRowsInput?.addEventListener('input', (e) => {
+            if (this.vipRowsVal) this.vipRowsVal.textContent = e.target.value;
+        });
+
+        // Venue Name Input
+        this.venueNameInput?.addEventListener('change', () => {
+            if (this.venue) this.venue.name = this.venueNameInput.value;
+            this.saveToFirebase();
+        });
 
         this.optimizeBtn.addEventListener('click', () => this.startOptimization());
         this.compareBtn.addEventListener('click', () => this.compareResults());
@@ -319,9 +354,10 @@ class App {
     }
 
     updateVenueConfig() {
-        this.venue.rows = parseInt(this.venueRowsInput.value);
-        this.venue.cols = parseInt(this.venueColsInput.value);
-        this.venue.vipRows = parseInt(this.vipRowsInput.value);
+        this.venue.rows = parseInt(this.venueRowsInput.value) || 8;
+        this.venue.cols = parseInt(this.venueColsInput.value) || 10;
+        this.venue.vipRows = parseInt(this.vipRowsInput.value) || 2;
+        this.venue.name = this.venueNameInput?.value || 'Main Auditorium';
         this.renderVenue();
     }
 
